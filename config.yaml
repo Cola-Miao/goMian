@@ -1,0 +1,12 @@
+Server:
+  Addr: 'localhost'
+  Port: 5912
+Mysql:
+  Name: 'root'
+  Password: 'root'
+  Addr: 'localhost'
+  Port: 3306
+  Database: 'goMian'
+Redis:
+  Addr: 'localhost:6379'
+  Password: 'root'
