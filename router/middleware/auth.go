@@ -2,9 +2,9 @@ package middleware
 
 import (
 	"github.com/gin-gonic/gin"
-	"offerBook/config/inner"
-	"offerBook/router/service"
-	"offerBook/utils"
+	"goMian/config/inner"
+	"goMian/router/service"
+	"goMian/utils"
 	"time"
 )
 

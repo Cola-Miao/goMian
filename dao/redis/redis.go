@@ -3,7 +3,7 @@ package redis
 import (
 	"context"
 	"github.com/redis/go-redis/v9"
-	"offerBook/config"
+	"goMian/config"
 )
 
 var DB = new(redisDB)

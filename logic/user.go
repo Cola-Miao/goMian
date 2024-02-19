@@ -2,9 +2,9 @@ package logic
 
 import (
 	"errors"
-	"offerBook/dao/mysql"
-	"offerBook/model"
-	"offerBook/utils"
+	"goMian/dao/mysql"
+	"goMian/model"
+	"goMian/utils"
 )
 
 func NewUser(u *model.User) error {

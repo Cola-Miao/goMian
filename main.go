@@ -2,11 +2,11 @@ package main
 
 import (
 	"fmt"
+	"goMian/config"
+	"goMian/dao/redis"
+	"goMian/initialize"
+	"goMian/router"
 	"log"
-	"offerBook/config"
-	"offerBook/dao/redis"
-	"offerBook/initialize"
-	"offerBook/router"
 )
 
 func main() {

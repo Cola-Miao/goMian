@@ -1,4 +1,4 @@
-module offerBook
+module goMian
 
 go 1.21
 

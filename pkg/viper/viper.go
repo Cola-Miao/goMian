@@ -3,8 +3,8 @@ package viper
 import (
 	"github.com/fsnotify/fsnotify"
 	"github.com/spf13/viper"
+	"goMian/config"
 	"log"
-	"offerBook/config"
 )
 
 func Init() error {

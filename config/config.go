@@ -1,5 +1,5 @@
 package config
 
-import "offerBook/model"
+import "goMian/model"
 
 var Cfg model.Config

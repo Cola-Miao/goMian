@@ -2,9 +2,9 @@ package api
 
 import (
 	"github.com/gin-gonic/gin"
-	"offerBook/logic"
-	"offerBook/model"
-	"offerBook/router/service"
+	"goMian/logic"
+	"goMian/model"
+	"goMian/router/service"
 )
 
 func SignUp(c *gin.Context) {
@@ -31,6 +31,6 @@ func Login(c *gin.Context) {
 		service.ErrorMessage(c, err, "", false)
 		return
 	}
-	c.SetCookie("jwt", token, 0, "/", "/", false, false)
+	c.SetCookie("jwt", token, 0, "/", "", false, false)
 	service.Message(c, "login successful")
 }

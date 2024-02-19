@@ -9,9 +9,9 @@ type Interview struct {
 	gorm.Model
 	Owner    int
 	Status   int
-	Company  string
-	Position string
-	Notes    string
-	Public   bool
-	Time     time.Time
+	Company  string        `json:"company,omitempty"`
+	Position string        `json:"position,omitempty"`
+	Notes    string        `json:"notes,omitempty"`
+	Public   bool          `json:"public,omitempty"`
+	Time     time.Duration `json:"time"`
 }

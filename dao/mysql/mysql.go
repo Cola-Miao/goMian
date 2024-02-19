@@ -2,10 +2,10 @@ package mysql
 
 import (
 	"fmt"
+	"goMian/config"
+	"goMian/model"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
-	"offerBook/config"
-	"offerBook/model"
 )
 
 var DB = new(mysqlDB)

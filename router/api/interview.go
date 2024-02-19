@@ -2,9 +2,9 @@ package api
 
 import (
 	"github.com/gin-gonic/gin"
-	"offerBook/logic"
-	"offerBook/model"
-	"offerBook/router/service"
+	"goMian/logic"
+	"goMian/model"
+	"goMian/router/service"
 )
 
 func CreateInterview(c *gin.Context) {
@@ -17,5 +17,14 @@ func CreateInterview(c *gin.Context) {
 	if err := logic.CreateInterview(&it); err != nil {
 		service.ErrorMessage(c, err, "create interview failed", true)
 	}
-	service.Message(c, "create interview success")
+	service.Message(c, "create interview successful")
+}
+
+func RefreshInterview(c *gin.Context) {
+	id := c.GetInt("id")
+	if err := logic.RefreshInterview(id); err != nil {
+		service.ErrorMessage(c, err, "refresh interview failed", true)
+		return
+	}
+	service.Message(c, "refresh interview successful")
 }

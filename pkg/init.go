@@ -2,8 +2,8 @@ package pkg
 
 import (
 	"github.com/golang-jwt/jwt/v5"
-	"offerBook/pkg/log"
-	"offerBook/pkg/viper"
+	"goMian/pkg/log"
+	"goMian/pkg/viper"
 )
 
 func Init() (err error) {

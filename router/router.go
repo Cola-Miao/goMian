@@ -2,8 +2,8 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
-	"offerBook/router/api"
-	"offerBook/router/middleware"
+	"goMian/router/api"
+	"goMian/router/middleware"
 )
 
 func Init() *gin.Engine {
@@ -17,6 +17,7 @@ func Init() *gin.Engine {
 	private := r.Group("/", middleware.Auth())
 	{
 		private.GET("/private", api.Private)
+		private.GET("/refresh_interview", api.RefreshInterview)
 		private.POST("/interview", api.CreateInterview)
 	}
 	return r

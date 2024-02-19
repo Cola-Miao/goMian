@@ -2,8 +2,8 @@ package mysql
 
 import (
 	"errors"
+	"goMian/model"
 	"gorm.io/gorm"
-	"offerBook/model"
 )
 
 func (msq *mysqlDB) CreateUser(u *model.User) error {
