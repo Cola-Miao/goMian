@@ -1,4 +1,5 @@
 Server:
+  Domain: 'localhost:5912'
   Addr: 'localhost'
   Port: 5912
 Mysql:

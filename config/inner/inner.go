@@ -7,6 +7,13 @@ const (
 	JWTFlushTime   = time.Hour * 24
 
 	RedisTimeout = time.Second * 10
+
+	CookieExpiresTime = 60 * 60 * 24 * 3
+
+	InterviewBufferTime  = time.Hour * 24
+	InterviewExpiresTime = time.Hour * 8
+
+	ErrorGroupLimit = 8
 )
 
 var (

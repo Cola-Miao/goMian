@@ -2,6 +2,8 @@ package api
 
 import (
 	"github.com/gin-gonic/gin"
+	"goMian/config"
+	"goMian/config/inner"
 	"goMian/logic"
 	"goMian/model"
 	"goMian/router/service"
@@ -31,6 +33,6 @@ func Login(c *gin.Context) {
 		service.ErrorMessage(c, err, "", false)
 		return
 	}
-	c.SetCookie("jwt", token, 0, "/", "", false, false)
+	c.SetCookie("jwt", token, inner.CookieExpiresTime, "/", config.Cfg.Server.Domain, false, false)
 	service.Message(c, "login successful")
 }

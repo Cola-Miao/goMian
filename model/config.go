@@ -7,8 +7,9 @@ type Config struct {
 }
 
 type Server struct {
-	Addr string
-	Port int
+	Domain string
+	Addr   string
+	Port   int
 }
 
 type Mysql struct {
