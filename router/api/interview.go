@@ -28,3 +28,13 @@ func RefreshInterview(c *gin.Context) {
 	}
 	service.Message(c, "refresh interview successful")
 }
+
+func InterviewList(c *gin.Context) {
+	id := c.GetInt("id")
+	its, err := logic.InterviewList(id)
+	if err != nil {
+		service.ErrorMessage(c, err, "get interview list failed", true)
+		return
+	}
+	service.Message(c, "get interview list successful", its)
+}

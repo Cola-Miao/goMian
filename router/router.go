@@ -18,6 +18,7 @@ func Init() *gin.Engine {
 	{
 		private.GET("/private", api.Private)
 		private.GET("/refresh_interview", api.RefreshInterview)
+		private.GET("/interviewList", api.InterviewList)
 		private.POST("/interview", api.CreateInterview)
 	}
 	return r

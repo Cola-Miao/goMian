@@ -1,6 +1,7 @@
 package logic
 
 import (
+	rdb "github.com/redis/go-redis/v9"
 	"goMian/config/inner"
 	"goMian/dao/mysql"
 	"goMian/dao/redis"
@@ -22,12 +23,12 @@ func CreateInterview(it *model.Interview) error {
 	return nil
 }
 
-func RefreshInterview(owner int) error {
+func RefreshInterview(owner any) error {
 	its, err := mysql.DB.FindInterviewsByOwner(owner)
 	if err != nil {
 		return err
 	}
-	var itsID []any
+	var itsZ []rdb.Z
 	if len(its) < 1 {
 		return nil
 	}
@@ -39,7 +40,10 @@ func RefreshInterview(owner int) error {
 			err = mysql.DB.InterviewStatus(&cp)
 			return err
 		})
-		itsID = append(itsID, int(it.ID))
+		itsZ = append(itsZ, rdb.Z{
+			Score:  float64(it.Time),
+			Member: it.ID,
+		})
 	}
 	if err = eg.Wait(); err != nil {
 		return err
@@ -47,8 +51,24 @@ func RefreshInterview(owner int) error {
 	if err = redis.DB.DeleteInterviewByOwner(owner); err != nil {
 		return err
 	}
-	if err = redis.DB.FillInterview(itsID, owner); err != nil {
+	if err = redis.DB.FillInterview(itsZ, owner); err != nil {
 		return err
 	}
 	return nil
+}
+
+func InterviewList(id int) ([]model.Interview, error) {
+	itsID, err := redis.DB.FindInterviewsByOwner(id)
+	if err != nil {
+		return nil, err
+	}
+	var its []model.Interview
+	for _, itID := range itsID {
+		it, err := mysql.DB.FindInterviewByID(itID)
+		if err != nil {
+			return nil, err
+		}
+		its = append(its, *it)
+	}
+	return its, nil
 }

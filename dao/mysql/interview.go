@@ -15,10 +15,16 @@ func (msq *mysqlDB) FindLastInterview() (*model.Interview, error) {
 	return &it, err
 }
 
-func (msq *mysqlDB) FindInterviewsByOwner(owner int) ([]model.Interview, error) {
+func (msq *mysqlDB) FindInterviewsByOwner(owner any) ([]model.Interview, error) {
 	var its []model.Interview
 	err := msq.db.Model(&model.Interview{}).Where("owner = ?", owner).Find(&its).Error
 	return its, err
+}
+
+func (msq *mysqlDB) FindInterviewByID(id any) (*model.Interview, error) {
+	var it model.Interview
+	err := msq.db.Model(&model.Interview{}).Where("id = ?", id).First(&it).Error
+	return &it, err
 }
 
 func (msq *mysqlDB) UpdateInterviewStatus(it *model.Interview) error {
