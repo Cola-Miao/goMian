@@ -38,3 +38,28 @@ func InterviewList(c *gin.Context) {
 	}
 	service.Message(c, "get interview list successful", its)
 }
+
+func DeleteInterview(c *gin.Context) {
+	id := c.GetInt("id")
+	itID := c.Query("id")
+	if err := logic.DeleteInterview(id, itID); err != nil {
+		service.ErrorMessage(c, err, "delete interview failed", true)
+		return
+	}
+	service.Message(c, "delete interview successful")
+}
+
+func AddInterviewDetail(c *gin.Context) {
+	id := c.GetInt("id")
+	relevance := c.Query("rel")
+	var detail model.InterviewDetail
+	if err := c.ShouldBindJSON(&detail); err != nil {
+		service.ErrorMessage(c, err, "parse form failed", true)
+		return
+	}
+	if err := logic.AddInterviewDetail(id, relevance, &detail); err != nil {
+		service.ErrorMessage(c, err, "add interview failed", true)
+		return
+	}
+	service.Message(c, "add details successful")
+}

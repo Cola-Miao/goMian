@@ -7,14 +7,24 @@ import (
 )
 
 type Interview struct {
-	gorm.Model
-	Owner    int
-	Status   int    // -2 Not yet, -1 Close, 0, 1 Over
-	Time     int64  `json:"time"`
-	Company  string `json:"company,omitempty"`
-	Position string `json:"position,omitempty"`
-	Notes    string `json:"notes,omitempty"`
-	Public   bool   `json:"public,omitempty"`
+	gorm.Model `json:"-"`
+	Owner      int    `json:"-"`
+	Status     int    `json:"-"` // -2 Not yet, -1 Close, 0, 1 Over
+	Detail     int    `json:"-"`
+	Time       int64  `json:"time"`
+	Company    string `json:"company,omitempty"`
+	Position   string `json:"position,omitempty"`
+	Memo       string `json:"memo,omitempty"`
+	Public     bool   `json:"public,omitempty"`
+}
+
+type InterviewDetail struct {
+	gorm.Model     `json:"-"`
+	Question       string `json:"question"`
+	Answer         string `json:"answer"`
+	Notes          string `json:"notes,omitempty"`
+	SelfEvaluation string `json:"self-evaluation,omitempty"`
+	HREvaluation   string `json:"hr-evaluation,omitempty"`
 }
 
 func (it *Interview) InitStatus() {

@@ -1,6 +1,7 @@
 package logic
 
 import (
+	"errors"
 	rdb "github.com/redis/go-redis/v9"
 	"goMian/config/inner"
 	"goMian/dao/mysql"
@@ -64,11 +65,47 @@ func InterviewList(id int) ([]model.Interview, error) {
 	}
 	var its []model.Interview
 	for _, itID := range itsID {
-		it, err := mysql.DB.FindInterviewByID(itID)
+		var it *model.Interview
+		it, err = mysql.DB.FindInterviewByID(itID)
 		if err != nil {
 			return nil, err
 		}
 		its = append(its, *it)
 	}
 	return its, nil
+}
+
+func DeleteInterview(id int, itID string) error {
+	if err := mysql.DB.DeleteInterviewByID(id, itID); err != nil {
+		return err
+	}
+	if err := redis.DB.DeleteInterviewByID(id, itID); err != nil {
+		return err
+	}
+	return nil
+}
+
+func AddInterviewDetail(id int, relevance string, detail *model.InterviewDetail) error {
+	it, err := mysql.DB.FindInterviewByID(relevance)
+	if err != nil {
+		return err
+	}
+	if id != it.Owner {
+		return errors.New("no auth")
+	}
+	if it.Detail > 0 {
+		if err = mysql.DB.DeleteDetailByID(it.Detail); err != nil {
+			return err
+		}
+	}
+	detailID := <-generator.Gtr.DetailID
+	detail.ID = uint(detailID)
+	it.Detail = detailID
+	if err = mysql.DB.UpdateInterviewDetail(it); err != nil {
+		return err
+	}
+	if err = mysql.DB.AddInterviewDetail(detail); err != nil {
+		return err
+	}
+	return nil
 }

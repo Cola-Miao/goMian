@@ -17,6 +17,7 @@ type mysqlDB struct {
 var migrateList = []any{
 	&model.User{},
 	&model.Interview{},
+	&model.InterviewDetail{},
 }
 
 func (msq *mysqlDB) Init() error {

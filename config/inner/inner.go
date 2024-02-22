@@ -14,6 +14,8 @@ const (
 	InterviewExpiresTime = time.Hour * 8
 
 	ErrorGroupLimit = 8
+
+	InterviewKetFormat = "interview:%d"
 )
 
 var (

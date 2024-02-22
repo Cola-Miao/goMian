@@ -17,9 +17,11 @@ func Init() *gin.Engine {
 	private := r.Group("/", middleware.Auth())
 	{
 		private.GET("/private", api.Private)
-		private.GET("/refresh_interview", api.RefreshInterview)
+		private.GET("/interviewDel", api.DeleteInterview)
 		private.GET("/interviewList", api.InterviewList)
+		private.GET("/refresh_interview", api.RefreshInterview)
 		private.POST("/interview", api.CreateInterview)
+		private.POST("/interviewDetail", api.AddInterviewDetail)
 	}
 	return r
 }
