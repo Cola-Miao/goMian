@@ -1,7 +1,7 @@
 Server:
-  Domain: 'localhost:5912'
+  Domain: 'localhost:8080'
   Addr: 'localhost'
-  Port: 5912
+  Port: 8080
 Mysql:
   Name: 'root'
   Password: 'root'
