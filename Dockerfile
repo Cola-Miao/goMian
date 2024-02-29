@@ -1,11 +1,10 @@
 FROM golang:alpine AS builder
-LABEL authors="Cola_Miao"
 
 WORKDIR /build
 
 ADD go.mod .
 COPY . .
-RUN go build -o goMian goMian.go
+RUN go build -o goMian main.go
 
 FROM alpine
 
